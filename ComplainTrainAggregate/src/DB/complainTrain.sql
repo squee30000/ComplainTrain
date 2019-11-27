@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 21, 2019 at 04:20 PM
+-- Generation Time: Nov 27, 2019 at 04:50 AM
 -- Server version: 10.1.34-MariaDB
 -- PHP Version: 7.2.8
 
@@ -81,6 +81,13 @@ CREATE TABLE `department` (
   `DeptName` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `department`
+--
+
+INSERT INTO `department` (`DeptID`, `DeptName`) VALUES
+(1, 'Managment');
+
 -- --------------------------------------------------------
 
 --
@@ -95,6 +102,13 @@ CREATE TABLE `employee` (
   `Department` int(11) NOT NULL,
   `Rank` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `employee`
+--
+
+INSERT INTO `employee` (`EmployeeID`, `FName`, `LName`, `Address`, `Department`, `Rank`) VALUES
+(1, 'Admin', 'Administrator', 'Doesnt matter', 1, 2);
 
 -- --------------------------------------------------------
 
@@ -186,13 +200,13 @@ ALTER TABLE `complaint`
 -- AUTO_INCREMENT for table `department`
 --
 ALTER TABLE `department`
-  MODIFY `DeptID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `DeptID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `employee`
 --
 ALTER TABLE `employee`
-  MODIFY `EmployeeID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `EmployeeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `rank`
