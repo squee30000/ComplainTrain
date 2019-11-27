@@ -93,30 +93,6 @@ public class Login extends Application {
 				@Override
 				public void handle(ActionEvent e)
 				{
-
-					/*if (checkUname(userText.getText()))
-
-					if (adminCheckUname(userText.getText()))
-					{
-						if (adminCheckPwd(pwdText.getText()))
-						{
-							Admin c = new Admin();
-							c.start(primaryStage);
-						}
-						else
-							wrong.setVisible(true);
-					}
-					
-					else if (checkUname(userText.getText()))
-					{
-
-						if (checkPwd(pwdText.getText()))
-						{
-							Complaint c = new Complaint();
-							c.start(primaryStage);
-						}
-
-					*/
 					
 					try {
 						DB.DBaseConnect connection = new DBaseConnect();
@@ -135,13 +111,6 @@ public class Login extends Application {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
-					
-
-						else
-							wrong.setVisible(true);
-					}
-					else
-						wrong.setVisible(true);
 				}
 			};
 			
@@ -156,7 +125,7 @@ public class Login extends Application {
 			
 			ok.setOnAction(eventOk);
 			cancel.setOnAction(eventCancel);
-
+			
 			
 		} catch (Exception e) {
 			e.printStackTrace();
