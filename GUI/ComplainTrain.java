@@ -1,4 +1,4 @@
-package GUI;
+package Interface;
 import javafx.application.Application;
 
 public class ComplainTrain {
