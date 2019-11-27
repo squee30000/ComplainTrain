@@ -32,7 +32,7 @@ public class Admin extends Application {
 		
 	}
 	
-	private voide delete()
+	private void delete()
 	{
 		
 	}

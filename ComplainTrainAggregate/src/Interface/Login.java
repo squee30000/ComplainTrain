@@ -65,7 +65,7 @@ public class Login extends Application {
 			Button cancel = new Button("Cancel");
 			Label username = new Label("Username: ");
 			Label passwd = new Label("Password: ");
-			Label wrong = new Label("Wrong Username or Password")
+			Label wrong = new Label("Wrong Username or Password");
 			TextField userText = new TextField();
 			TextField pwdText = new TextField();
 			
