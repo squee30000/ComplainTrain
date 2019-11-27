@@ -13,6 +13,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.geometry.Pos;
 import javafx.geometry.Insets;
@@ -39,6 +40,22 @@ public class Login extends Application {
 		return false;
 	}
 	
+	private boolean adminCheckUname(String str)
+	{
+		if (str.equals("Admin")) {
+			return true;
+		}
+		return false;
+	}
+	
+	private boolean adminCheckPwd(String str)
+	{
+		if (str.equals("Pwd")) {
+			return true;
+		}
+		return false;
+	}
+	
 	public void start(Stage primaryStage) {
 		try {
 			String[] args = null;
@@ -49,13 +66,14 @@ public class Login extends Application {
 			gPane.setHgap(5);       
 			//gPane.setAlignment(Pos.LEFT);
        
-			Scene scene = new Scene(gPane,350,200);
+			Scene scene = new Scene(gPane,400,200);
 			Button ok = new Button("OK");
 			Button cancel = new Button("Cancel");
 			Label username = new Label("Username: ");
 			Label passwd = new Label("Password: ");
+			Label wrong = new Label("Wrong Username or Password");
 			TextField userText = new TextField();
-			TextField pwdText = new TextField();
+			PasswordField pwdText = new PasswordField();
 			
 			gPane.add(username, 0, 0);
 			gPane.add(userText, 2, 0);
@@ -63,21 +81,41 @@ public class Login extends Application {
 			gPane.add(pwdText, 2, 5);
 			gPane.add(ok, 0, 20);
 			gPane.add(cancel, 3, 20);
+			gPane.add(wrong, 0, 15);
+			
+			wrong.setVisible(false);
 			
 			primaryStage.setTitle("Login");
 			primaryStage.setScene(scene);
 			
 			primaryStage.show();
-			EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
+			EventHandler<ActionEvent> eventOk = new EventHandler<ActionEvent>() {
 				@Override
 				public void handle(ActionEvent e)
 				{
+
 					/*if (checkUname(userText.getText()))
+
+					if (adminCheckUname(userText.getText()))
+					{
+						if (adminCheckPwd(pwdText.getText()))
+						{
+							Admin c = new Admin();
+							c.start(primaryStage);
+						}
+						else
+							wrong.setVisible(true);
+					}
+					
+					else if (checkUname(userText.getText()))
+					{
+
 						if (checkPwd(pwdText.getText()))
 						{
 							Complaint c = new Complaint();
 							c.start(primaryStage);
 						}
+
 					*/
 					
 					try {
@@ -98,10 +136,26 @@ public class Login extends Application {
 						e1.printStackTrace();
 					}
 					
+
+						else
+							wrong.setVisible(true);
+					}
+					else
+						wrong.setVisible(true);
 				}
 			};
 			
-			ok.setOnAction(event);
+			EventHandler<ActionEvent> eventCancel = new EventHandler<ActionEvent>() {
+				@Override
+				public void handle(ActionEvent e)
+				{
+					primaryStage.close();
+
+				}
+			};
+			
+			ok.setOnAction(eventOk);
+			cancel.setOnAction(eventCancel);
 
 			
 		} catch (Exception e) {
