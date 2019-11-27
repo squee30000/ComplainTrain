@@ -1,4 +1,7 @@
+package Interface;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -15,13 +18,25 @@ public class Login extends Application {
 	{
 	}
 	
-	private boolean check()
+	private boolean checkUname(String str)
 	{
-		
+		if (str.equals("Complain")) {
+			return true;
+		}
+		return false;
+	}
+	
+	private boolean checkPwd(String str)
+	{
+		if (str.equals("Train")) {
+			return true;
+		}
+		return false;
 	}
 	
 	public void start(Stage primaryStage) {
 		try {
+			String[] args = null;
 			//BorderPane root = new BorderPane();
 			GridPane gPane = new GridPane();
 			gPane.setPadding(new Insets(10, 10, 10, 10));  
@@ -48,6 +63,22 @@ public class Login extends Application {
 			primaryStage.setScene(scene);
 			
 			primaryStage.show();
+			EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
+				@Override
+				public void handle(ActionEvent e)
+				{
+					if (checkUname(userText.getText()))
+						if (checkPwd(pwdText.getText()))
+						{
+							Complaint c = new Complaint();
+							c.start(primaryStage);
+						}
+				}
+			};
+			
+			ok.setOnAction(event);
+
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
