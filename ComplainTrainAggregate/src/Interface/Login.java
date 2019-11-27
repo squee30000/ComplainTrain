@@ -1,4 +1,9 @@
 package Interface;
+import java.io.IOException;
+import java.sql.SQLException;
+
+import DB.DBaseConnect;
+import DB.NetworkConnect;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -88,6 +93,9 @@ public class Login extends Application {
 				@Override
 				public void handle(ActionEvent e)
 				{
+
+					/*if (checkUname(userText.getText()))
+
 					if (adminCheckUname(userText.getText()))
 					{
 						if (adminCheckPwd(pwdText.getText()))
@@ -101,11 +109,34 @@ public class Login extends Application {
 					
 					else if (checkUname(userText.getText()))
 					{
+
 						if (checkPwd(pwdText.getText()))
 						{
 							Complaint c = new Complaint();
 							c.start(primaryStage);
 						}
+
+					*/
+					
+					try {
+						DB.DBaseConnect connection = new DBaseConnect();
+						
+						
+						if(connection.LoginAttempt(userText.getText())) {
+							Complaint c = new Complaint();
+							c.start(primaryStage);
+							
+						}
+						
+					} catch (ClassNotFoundException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
+
 						else
 							wrong.setVisible(true);
 					}
@@ -119,6 +150,7 @@ public class Login extends Application {
 				public void handle(ActionEvent e)
 				{
 					primaryStage.close();
+
 				}
 			};
 			
@@ -130,8 +162,18 @@ public class Login extends Application {
 			e.printStackTrace();
 		}
 	}
+	boolean NetworkLogin() {
+		
+		return false;
+	}
 
 	public static void main(String[] args) {
 		launch(args);
+		try {
+			DB.NetworkConnect N =  new NetworkConnect();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 } 
