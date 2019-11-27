@@ -8,6 +8,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.geometry.Pos;
 import javafx.geometry.Insets;
@@ -60,14 +61,14 @@ public class Login extends Application {
 			gPane.setHgap(5);       
 			//gPane.setAlignment(Pos.LEFT);
        
-			Scene scene = new Scene(gPane,350,200);
+			Scene scene = new Scene(gPane,400,200);
 			Button ok = new Button("OK");
 			Button cancel = new Button("Cancel");
 			Label username = new Label("Username: ");
 			Label passwd = new Label("Password: ");
 			Label wrong = new Label("Wrong Username or Password");
 			TextField userText = new TextField();
-			TextField pwdText = new TextField();
+			PasswordField pwdText = new PasswordField();
 			
 			gPane.add(username, 0, 0);
 			gPane.add(userText, 2, 0);
