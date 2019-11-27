@@ -1,4 +1,7 @@
+package GUI;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -10,6 +13,14 @@ import javafx.geometry.Insets;
 public class Complaint extends Application {
 	public Complaint()
 	{
+	}
+	
+	private void upload(String name, String complaint, String dept) {
+		
+	}
+	
+	private void upload(String complaint, String dept) {
+		
 	}
 	
 	public void start(Stage primaryStage) {
@@ -57,6 +68,21 @@ public class Complaint extends Application {
 			primaryStage.setScene(scene);
 			
 			primaryStage.show();
+			
+			EventHandler<ActionEvent> eventSubmit = new EventHandler<ActionEvent>() {
+				@Override
+				public void handle(ActionEvent e)
+				{
+					if (anon.isSelected()) {
+						upload(complaintEntry.getText(), deptList.getValue().toString());
+					}
+					else
+						upload(nameTxt.getText(), complaintEntry.getText(), deptList.getValue().toString());
+
+				}
+			};
+			
+			submit.setOnAction(eventSubmit);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

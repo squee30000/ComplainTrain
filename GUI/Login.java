@@ -1,3 +1,4 @@
+package GUI;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -33,6 +34,22 @@ public class Login extends Application {
 		return false;
 	}
 	
+	private boolean adminCheckUname(String str)
+	{
+		if (str.equals("Admin")) {
+			return true;
+		}
+		return false;
+	}
+	
+	private boolean adminCheckPwd(String str)
+	{
+		if (str.equals("Pwd")) {
+			return true;
+		}
+		return false;
+	}
+	
 	public void start(Stage primaryStage) {
 		try {
 			String[] args = null;
@@ -48,6 +65,7 @@ public class Login extends Application {
 			Button cancel = new Button("Cancel");
 			Label username = new Label("Username: ");
 			Label passwd = new Label("Password: ");
+			Label wrong = new Label("Wrong Username or Password")
 			TextField userText = new TextField();
 			TextField pwdText = new TextField();
 			
@@ -57,25 +75,54 @@ public class Login extends Application {
 			gPane.add(pwdText, 2, 5);
 			gPane.add(ok, 0, 20);
 			gPane.add(cancel, 3, 20);
+			gPane.add(wrong, 0, 15);
+			
+			wrong.setVisible(false);
 			
 			primaryStage.setTitle("Login");
 			primaryStage.setScene(scene);
 			
 			primaryStage.show();
-			EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
+			EventHandler<ActionEvent> eventOk = new EventHandler<ActionEvent>() {
 				@Override
 				public void handle(ActionEvent e)
 				{
-					if (checkUname(userText.getText()))
+					if (adminCheckUname(userText.getText()))
+					{
+						if (adminCheckPwd(pwdText.getText()))
+						{
+							Admin c = new Admin();
+							c.start(primaryStage);
+						}
+						else
+							wrong.setVisible(true);
+					}
+					
+					else if (checkUname(userText.getText()))
+					{
 						if (checkPwd(pwdText.getText()))
 						{
 							Complaint c = new Complaint();
 							c.start(primaryStage);
 						}
+						else
+							wrong.setVisible(true);
+					}
+					else
+						wrong.setVisible(true);
 				}
 			};
 			
-			ok.setOnAction(event);
+			EventHandler<ActionEvent> eventCancel = new EventHandler<ActionEvent>() {
+				@Override
+				public void handle(ActionEvent e)
+				{
+					primaryStage.close();
+				}
+			};
+			
+			ok.setOnAction(eventOk);
+			cancel.setOnAction(eventCancel);
 
 			
 		} catch (Exception e) {

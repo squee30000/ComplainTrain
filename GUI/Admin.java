@@ -1,3 +1,4 @@
+package GUI;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
@@ -8,10 +9,32 @@ import javafx.geometry.Pos;
 import javafx.geometry.Insets;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 
 public class Admin extends Application {
 	public Admin()
 	{
+	}
+	
+	private void search(String text)
+	{
+		
+	}
+	
+	private void archive()
+	{
+		
+	}
+	
+	private void resolve()
+	{
+		
+	}
+	
+	private voide delete()
+	{
+		
 	}
 	
 	public void start(Stage primaryStage) {
@@ -76,6 +99,31 @@ public class Admin extends Application {
 			primaryStage.setScene(scene);
 			
 			primaryStage.show();
+			
+			EventHandler<ActionEvent> eventSubmit = new EventHandler<ActionEvent>() {
+				@Override
+				public void handle(ActionEvent e)
+				{
+					search(searchTxt.getText());
+
+				}
+			};
+			
+			EventHandler<ActionEvent> eventOk = new EventHandler<ActionEvent>() {
+				@Override
+				public void handle(ActionEvent e)
+				{
+					if (archiveC.isSelected())
+						archive();
+					if (resolveC.isSelected())
+						resolve();
+					if (deleteC.isSelected())
+						delete();
+				}
+			};
+			
+			submit.setOnAction(eventSubmit);
+			ok.setOnAction(eventOk);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
