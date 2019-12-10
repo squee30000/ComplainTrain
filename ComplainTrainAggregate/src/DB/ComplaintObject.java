@@ -16,11 +16,14 @@ public class ComplaintObject {
         tags = new ArrayList<ComplaintTags>();
         this.name = name;
         complaintBody = complaint;
+        String dept1[] = department.split(" ");
+               
         //[TODO] populate tags given a string of depts
     }
     public ComplaintObject(String complaint, String dept){
         tags = new ArrayList<ComplaintTags>();
         complaintBody = complaint;
+        String dept2[] = department.split(" ");
         //[TODO] populate tags given a string of depts 
     }
     public void addInfo(String body, String dept) {
