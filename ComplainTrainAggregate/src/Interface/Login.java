@@ -97,9 +97,10 @@ public class Login extends Application {
 					try {
 						DB.DBaseConnect connection = new DBaseConnect();
 						
-						
-						if(connection.LoginAttempt(userText.getText())) {
-							Complaint c = new Complaint();
+						String answer = connection.LoginAttempt(userText.getText());
+						if(answer != "") {
+							
+							Complaint c = new Complaint(answer);
 							c.start(primaryStage);
 							
 						}

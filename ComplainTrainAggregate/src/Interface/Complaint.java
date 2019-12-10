@@ -11,8 +11,10 @@ import javafx.geometry.Pos;
 import javafx.geometry.Insets;
 
 public class Complaint extends Application {
-	public Complaint()
+	public String user;
+	public Complaint(String userLogin)
 	{
+		user = userLogin;
 	}
 	
 	private void upload(String name, String complaint, String dept) {

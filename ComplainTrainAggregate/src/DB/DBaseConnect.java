@@ -9,7 +9,7 @@ public class DBaseConnect {
 		
 		connection = DriverManager.getConnection("jdbc:mysql://localhost/complainTrainCore");	
 	}
-	public boolean LoginAttempt(String ID) throws SQLException {
+	public String LoginAttempt(String ID) throws SQLException {
 		Statement statement = connection.createStatement();
 		
 		ResultSet RS = statement.executeQuery
@@ -21,12 +21,9 @@ public class DBaseConnect {
 		
 		//return true;
 		if(RS.getString("rank")!= "0") {
-			return true;
+			return RS.getString("EmployeeID");
 		}else {
-			
-			System.out.println("Not quite working Eli");
-			System.out.println(RS.getString("rank"));
-			return false;
+			return "";
 		}
 		
 		
