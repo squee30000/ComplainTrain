@@ -12,8 +12,10 @@ public class NetworkConnect{
 	private OutputStream outputStream;
 	private ObjectOutputStream objOutputStream;
 	
+	
+	//"Localhost" needs to be replaced with a static IP of the machine running the server
 	public NetworkConnect() throws IOException {
-		s = new Socket("localhost", 7070); //Needs to be changed to connect to database
+		s = new Socket("localhost", 7070); 
 		outputStream = s.getOutputStream();
 		objOutputStream = new ObjectOutputStream(outputStream);	
 		
