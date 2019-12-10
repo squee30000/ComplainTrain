@@ -1,4 +1,5 @@
 package Interface;
+import DB.*;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -18,6 +19,8 @@ public class Complaint extends Application {
 	}
 	
 	private void upload(String name, String complaint, String dept) {
+		DB.ComplaintObject c = new ComplaintObject();
+		
 		
 	}
 	
