@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 21, 2019 at 04:20 PM
+-- Generation Time: Dec 10, 2019 at 09:00 PM
 -- Server version: 10.1.34-MariaDB
 -- PHP Version: 7.2.8
 
@@ -36,6 +36,13 @@ CREATE TABLE `category` (
   `catgAlias` varchar(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `category`
+--
+
+INSERT INTO `category` (`categID`, `catgName`, `catgAlias`) VALUES
+(1, 'Personal Complaints', 'PERS');
+
 -- --------------------------------------------------------
 
 --
@@ -48,6 +55,13 @@ CREATE TABLE `complaint` (
   `complaintResolution` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `complaint`
+--
+
+INSERT INTO `complaint` (`complaintID`, `complaintBody`, `complaintResolution`) VALUES
+(1, 'I just think Kevin is not living up to the standards of this fictitious company', 0);
+
 -- --------------------------------------------------------
 
 --
@@ -58,6 +72,13 @@ CREATE TABLE `complaintcategory` (
   `complaintID` int(11) NOT NULL,
   `categoryID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `complaintcategory`
+--
+
+INSERT INTO `complaintcategory` (`complaintID`, `categoryID`) VALUES
+(1, 1);
 
 -- --------------------------------------------------------
 
@@ -70,6 +91,13 @@ CREATE TABLE `complaintemployee` (
   `employeeID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `complaintemployee`
+--
+
+INSERT INTO `complaintemployee` (`complaintID`, `employeeID`) VALUES
+(1, 4);
+
 -- --------------------------------------------------------
 
 --
@@ -80,6 +108,15 @@ CREATE TABLE `department` (
   `DeptID` int(11) NOT NULL,
   `DeptName` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `department`
+--
+
+INSERT INTO `department` (`DeptID`, `DeptName`) VALUES
+(1, 'Managment'),
+(2, 'Human Resources'),
+(3, 'Logistics');
 
 -- --------------------------------------------------------
 
@@ -95,6 +132,16 @@ CREATE TABLE `employee` (
   `Department` int(11) NOT NULL,
   `Rank` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `employee`
+--
+
+INSERT INTO `employee` (`EmployeeID`, `FName`, `LName`, `Address`, `Department`, `Rank`) VALUES
+(1, 'Admin', 'Administrator', 'Doesnt matter', 1, 2),
+(3, 'Eli', 'Smithson', 'Not important', 1, 2),
+(4, 'Ben', 'Van Oss', 'Dont know', 2, 3),
+(5, 'Kevin', 'Walbrunk', 'Earth', 3, 1);
 
 -- --------------------------------------------------------
 
@@ -157,8 +204,8 @@ ALTER TABLE `department`
 --
 ALTER TABLE `employee`
   ADD PRIMARY KEY (`EmployeeID`),
-  ADD UNIQUE KEY `Department` (`Department`),
-  ADD KEY `Rank` (`Rank`);
+  ADD KEY `Rank` (`Rank`),
+  ADD KEY `Department` (`Department`) USING BTREE;
 
 --
 -- Indexes for table `rank`
@@ -174,25 +221,25 @@ ALTER TABLE `rank`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `categID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `categID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `complaint`
 --
 ALTER TABLE `complaint`
-  MODIFY `complaintID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `complaintID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `department`
 --
 ALTER TABLE `department`
-  MODIFY `DeptID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `DeptID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `employee`
 --
 ALTER TABLE `employee`
-  MODIFY `EmployeeID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `EmployeeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `rank`
