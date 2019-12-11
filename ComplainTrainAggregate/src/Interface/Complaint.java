@@ -9,6 +9,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.control.*;
 import javafx.geometry.Pos;
 import javafx.geometry.Insets;
+import src.DB.ComplaintObject.java;
+import src.DB.ComplaintTags.java;
 
 public class Complaint extends Application {
 	public Complaint()
@@ -16,7 +18,8 @@ public class Complaint extends Application {
 	}
 	
 	private void upload(String name, String complaint, String dept) {
-		
+		ComplaintObject c = new ComplaintObject();
+		c.addBody(complaint);
 	}
 	
 	private void upload(String complaint, String dept) {
@@ -31,9 +34,8 @@ public class Complaint extends Application {
 			gPane.setVgap(5); 
 			gPane.setHgap(5);       
 			//gPane.setAlignment(Pos.LEFT);
-       
+			
 			Scene scene = new Scene(gPane,800,400);
-
 
 			Button submit = new Button("Submit");
 			Label name = new Label("Name: ");
@@ -46,10 +48,10 @@ public class Complaint extends Application {
 			
 			ComboBox deptList = new ComboBox();
 			deptList.getItems().addAll(
-				"HR",
-				"IT",
-				"Accounting",
-				"Sales"
+					ComplaintTags.SAFETY, 
+					ComplaintTags.PERSONNEL, 
+					ComplaintTags.MANAGEMENT, 
+					ComplaintTags.OPERATIONS
 			);
 			
 			gPane.add(name, 0, 0);
