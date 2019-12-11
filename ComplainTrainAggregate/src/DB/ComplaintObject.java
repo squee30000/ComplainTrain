@@ -16,15 +16,17 @@ public class ComplaintObject {
         tags = new ArrayList<ComplaintTags>();
         this.name = name;
         complaintBody = complaint;
-        String dept1[] = department.split(" ");
+        department = dept;
+        //String dept1[] = department.split(" ");
                
-        //[TODO] populate tags given a string of depts
+        
     }
     public ComplaintObject(String complaint, String dept){
         tags = new ArrayList<ComplaintTags>();
         complaintBody = complaint;
-        String dept2[] = department.split(" ");
-        //[TODO] populate tags given a string of depts 
+        department = dept;
+        //String dept2[] = dept.split(" ");
+       
     }
     public void addInfo(String body, String dept) {
     	complaintBody = body;
@@ -36,5 +38,15 @@ public class ComplaintObject {
     	department = d;
     }
     public void addTag(ComplaintTags tag){tags.add(tag);}
+    
+    public String getName() {
+    	return name;
+    }
+    public String getDepartment() {
+    	return department;
+    }
+    public String getText() {
+    	return complaintBody;
+    }
     
 }
