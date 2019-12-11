@@ -1,7 +1,4 @@
-package Interface;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
@@ -9,21 +6,10 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.control.*;
 import javafx.geometry.Pos;
 import javafx.geometry.Insets;
-import src.DB.ComplaintObject.java;
-import src.DB.ComplaintTags.java;
 
 public class Complaint extends Application {
 	public Complaint()
 	{
-	}
-	
-	private void upload(String name, String complaint, String dept) {
-		ComplaintObject c = new ComplaintObject();
-		c.addBody(complaint);
-	}
-	
-	private void upload(String complaint, String dept) {
-		
 	}
 	
 	public void start(Stage primaryStage) {
@@ -34,8 +20,9 @@ public class Complaint extends Application {
 			gPane.setVgap(5); 
 			gPane.setHgap(5);       
 			//gPane.setAlignment(Pos.LEFT);
-			
+       
 			Scene scene = new Scene(gPane,800,400);
+
 
 			Button submit = new Button("Submit");
 			Label name = new Label("Name: ");
@@ -48,10 +35,10 @@ public class Complaint extends Application {
 			
 			ComboBox deptList = new ComboBox();
 			deptList.getItems().addAll(
-					ComplaintTags.SAFETY, 
-					ComplaintTags.PERSONNEL, 
-					ComplaintTags.MANAGEMENT, 
-					ComplaintTags.OPERATIONS
+				"HR",
+				"IT",
+				"Accounting",
+				"Sales"
 			);
 			
 			gPane.add(name, 0, 0);
@@ -70,21 +57,6 @@ public class Complaint extends Application {
 			primaryStage.setScene(scene);
 			
 			primaryStage.show();
-			
-			EventHandler<ActionEvent> eventSubmit = new EventHandler<ActionEvent>() {
-				@Override
-				public void handle(ActionEvent e)
-				{
-					if (anon.isSelected()) {
-						upload(complaintEntry.getText(), deptList.getValue().toString());
-					}
-					else
-						upload(nameTxt.getText(), complaintEntry.getText(), deptList.getValue().toString());
-
-				}
-			};
-			
-			submit.setOnAction(eventSubmit);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
