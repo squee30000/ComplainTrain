@@ -4,6 +4,7 @@ import java.io.*;
 import java.net.InetSocketAddress;
 
 import java.net.Socket;
+import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
 
@@ -22,7 +23,17 @@ public class NetworkConnect{
 	}
 	
 	public void sendObject(ComplaintObject complaint) throws IOException {
-		objOutputStream.writeObject(complaint);
+		//objOutputStream.writeObject(complaint);
+		try {
+			DBaseConnect db = new DBaseConnect();
+			db.sendComplaint(complaint);
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	public void sendLogin() throws IOException{
 		

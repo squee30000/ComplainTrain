@@ -21,7 +21,7 @@ public class Complaint extends Application {
 	}
 	
 	private void upload(String name, String complaint, String dept) throws IOException {
-		DB.ComplaintObject c = new ComplaintObject(name, complaint, dept);
+		DB.ComplaintObject c = new ComplaintObject(user, complaint, dept);
 		DB.NetworkConnect net = new DB.NetworkConnect(); 
 		net.sendObject(c);
 		
