@@ -1,4 +1,6 @@
 package Interface;
+import java.io.IOException;
+
 import DB.*;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -18,14 +20,17 @@ public class Complaint extends Application {
 		user = userLogin;
 	}
 	
-	private void upload(String name, String complaint, String dept) {
-		DB.ComplaintObject c = new ComplaintObject();
-		
+	private void upload(String name, String complaint, String dept) throws IOException {
+		DB.ComplaintObject c = new ComplaintObject(name, complaint, dept);
+		DB.NetworkConnect net = new DB.NetworkConnect(); 
+		net.sendObject(c);
 		
 	}
 	
-	private void upload(String complaint, String dept) {
-		
+	private void upload(String complaint, String dept) throws IOException {
+		DB.ComplaintObject c = new ComplaintObject(complaint, dept);
+		DB.NetworkConnect net = new DB.NetworkConnect(); 
+		net.sendObject(c);
 	}
 	
 	public void start(Stage primaryStage) {
@@ -78,13 +83,19 @@ public class Complaint extends Application {
 				@Override
 				public void handle(ActionEvent e)
 				{
-					if (anon.isSelected()) {
-						upload(complaintEntry.getText(), deptList.getValue().toString());
+					
+					try {
+						if (anon.isSelected()) {
+							upload(complaintEntry.getText(), deptList.getValue().toString());
+						} else {
+							upload(nameTxt.getText(), complaintEntry.getText(), deptList.getValue().toString());
+						}
+					}catch(IOException i1) {
+						
+						
 					}
-					else
-						upload(nameTxt.getText(), complaintEntry.getText(), deptList.getValue().toString());
-
 				}
+					
 			};
 			
 			submit.setOnAction(eventSubmit);
