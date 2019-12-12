@@ -1,3 +1,8 @@
+package Interface;
+import java.io.IOException;
+import java.sql.SQLException;
+
+import DB.*;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
@@ -8,8 +13,41 @@ import javafx.geometry.Pos;
 import javafx.geometry.Insets;
 
 public class Complaint extends Application {
-	public Complaint()
+	public String user;
+	public Complaint(String userLogin)
 	{
+		user = userLogin;
+	}
+	
+	private void upload(String name, String complaint, String dept) throws IOException {
+		DB.ComplaintObject c = new ComplaintObject(user, complaint, dept);
+		DB.DBaseConnect db;
+		try {
+			db = new DB.DBaseConnect();
+			db.sendComplaint(c);
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+	}
+	
+	private void upload(String complaint, String dept) throws IOException {
+		DB.ComplaintObject c = new ComplaintObject(complaint, dept);
+		DB.DBaseConnect db;
+		try {
+			db = new DB.DBaseConnect();
+			db.sendComplaint(c);
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 	}
 	
 	public void start(Stage primaryStage) {
@@ -57,6 +95,28 @@ public class Complaint extends Application {
 			primaryStage.setScene(scene);
 			
 			primaryStage.show();
+	
+			EventHandler<ActionEvent> eventSubmit = new EventHandler<ActionEvent>() {
+				@Override
+				public void handle(ActionEvent e)
+				{
+					
+					try {
+						if (anon.isSelected()) {
+							upload(complaintEntry.getText(), deptList.getValue().toString());
+						} else {
+							upload(nameTxt.getText(), complaintEntry.getText(), deptList.getValue().toString());
+						}
+					}catch(IOException i1) {
+						
+						
+					}
+				}
+					
+			};
+			
+			submit.setOnAction(eventSubmit);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

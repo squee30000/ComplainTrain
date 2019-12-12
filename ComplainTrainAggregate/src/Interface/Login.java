@@ -9,13 +9,11 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.geometry.Pos;
 import javafx.geometry.Insets;
 
 public class Login extends Application {
@@ -23,7 +21,7 @@ public class Login extends Application {
 	public Login()
 	{
 	}
-	
+	/*
 	private boolean checkUname(String str)
 	{
 		if (str.equals("Complain")) {
@@ -55,10 +53,10 @@ public class Login extends Application {
 		}
 		return false;
 	}
-	
+	*/
 	public void start(Stage primaryStage) {
 		try {
-			String[] args = null;
+			//String[] args = null;
 			//BorderPane root = new BorderPane();
 			GridPane gPane = new GridPane();
 			gPane.setPadding(new Insets(10, 10, 10, 10));  
@@ -97,9 +95,10 @@ public class Login extends Application {
 					try {
 						DB.DBaseConnect connection = new DBaseConnect();
 						
-						
-						if(connection.LoginAttempt(userText.getText())) {
-							Complaint c = new Complaint();
+						String answer = connection.LoginAttempt(userText.getText());
+						if(answer != "") {
+							
+							Complaint c = new Complaint(answer);
 							c.start(primaryStage);
 							
 						}

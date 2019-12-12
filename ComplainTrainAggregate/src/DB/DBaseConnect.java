@@ -9,7 +9,7 @@ public class DBaseConnect {
 		
 		connection = DriverManager.getConnection("jdbc:mysql://localhost/complainTrainCore");	
 	}
-	public boolean LoginAttempt(String ID) throws SQLException {
+	public String LoginAttempt(String ID) throws SQLException {
 		Statement statement = connection.createStatement();
 		
 		ResultSet RS = statement.executeQuery
@@ -21,15 +21,33 @@ public class DBaseConnect {
 		
 		//return true;
 		if(RS.getString("rank")!= "0") {
-			return true;
+			return RS.getString("EmployeeID");
 		}else {
-			
-			System.out.println("Not quite working Eli");
-			System.out.println(RS.getString("rank"));
-			return false;
+			return "";
 		}
+	}
+	public void sendComplaint(ComplaintObject c)throws SQLException {
+		PreparedStatement p = connection.prepareStatement("INSERT into complaint (complaintBody) values(?);");
+		p.setString(1, c.getText());
+		
+		p.execute();
+		
+		Statement statement = connection.createStatement();
 		
 		
+		if(c.getName()!= null) {//excludes anonymous submissions
+			ResultSet complaintRecord = statement.executeQuery("SELECT c.complaintID" + 
+					"FROM complaint c, complaintCategory cg,, employee e, complaintemployee ce " + 
+					"WHERE complaintBody =  "+c.getText()+";");
+			
+			complaintRecord.next();
+			
+			p = connection.prepareStatement("INSERT into complaintemployee (complaintID, employeeID) values(?);");
+			
+			p.setString(1, c.getName());
+			p.setString(2, complaintRecord.getString(1));
+		}
+
 		
 	}
 }
