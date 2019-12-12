@@ -34,20 +34,19 @@ public class DBaseConnect {
 		
 		Statement statement = connection.createStatement();
 		
-		ResultSet complaintRecord = statement.executeQuery("SELECT complaintID" + 
-				"FROM complaint c, complaintCategory cg, category g, employee e, complaintemployee ce " + 
-				"WHERE c.complaintID = cg.complaintID " + 
-				"	AND cg.categoryID = g.categID " + 
-				"	AND c.complaintID=ce.complaintID " + 
-				"	AND ce.employeeID = e.employeeID " + 
-				"	AND complaintBody =  "+c.getText()+";");
 		
-		complaintRecord.next();
-		
-		p = connection.prepareStatement("INSERT into complaintemployee (complaintID, employeeID) values(?);");
-		
-		p.setString(1, c.getName());
-		p.setString(2, complaintRecord.getString(1));
+		if(c.getName()!= null) {//excludes anonymous submissions
+			ResultSet complaintRecord = statement.executeQuery("SELECT c.complaintID" + 
+					"FROM complaint c, complaintCategory cg,, employee e, complaintemployee ce " + 
+					"WHERE complaintBody =  "+c.getText()+";");
+			
+			complaintRecord.next();
+			
+			p = connection.prepareStatement("INSERT into complaintemployee (complaintID, employeeID) values(?);");
+			
+			p.setString(1, c.getName());
+			p.setString(2, complaintRecord.getString(1));
+		}
 
 		
 	}

@@ -1,5 +1,6 @@
 package Interface;
 import java.io.IOException;
+import java.sql.SQLException;
 
 import DB.*;
 import javafx.application.Application;
@@ -22,15 +23,33 @@ public class Complaint extends Application {
 	
 	private void upload(String name, String complaint, String dept) throws IOException {
 		DB.ComplaintObject c = new ComplaintObject(user, complaint, dept);
-		DB.NetworkConnect net = new DB.NetworkConnect(); 
-		net.sendObject(c);
+		DB.DBaseConnect db;
+		try {
+			db = new DB.DBaseConnect();
+			db.sendComplaint(c);
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
 	}
 	
 	private void upload(String complaint, String dept) throws IOException {
 		DB.ComplaintObject c = new ComplaintObject(complaint, dept);
-		DB.NetworkConnect net = new DB.NetworkConnect(); 
-		net.sendObject(c);
+		DB.DBaseConnect db;
+		try {
+			db = new DB.DBaseConnect();
+			db.sendComplaint(c);
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 	}
 	
 	public void start(Stage primaryStage) {
