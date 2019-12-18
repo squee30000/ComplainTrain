@@ -22,37 +22,7 @@ public class Login extends Application {
 	{
 	}
 	/*
-	private boolean checkUname(String str)
-	{
-		if (str.equals("Complain")) {
-			return true;
-		}
-		return false;
-	}
-	
-	private boolean checkPwd(String str)
-	{
-		if (str.equals("Train")) {
-			return true;
-		}
-		return false;
-	}
-	
-	private boolean adminCheckUname(String str)
-	{
-		if (str.equals("Admin")) {
-			return true;
-		}
-		return false;
-	}
-	
-	private boolean adminCheckPwd(String str)
-	{
-		if (str.equals("Pwd")) {
-			return true;
-		}
-		return false;
-	}
+
 	*/
 	public void start(Stage primaryStage) {
 		try {
@@ -64,7 +34,7 @@ public class Login extends Application {
 			gPane.setHgap(5);       
 			//gPane.setAlignment(Pos.LEFT);
        
-			Scene scene = new Scene(gPane,400,200);
+			Scene scene = new Scene(gPane,400,210);
 			Button ok = new Button("OK");
 			Button cancel = new Button("Cancel");
 			Label username = new Label("Username: ");
