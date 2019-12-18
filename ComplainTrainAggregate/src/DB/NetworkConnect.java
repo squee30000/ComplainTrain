@@ -16,7 +16,7 @@ public class NetworkConnect{
 	
 	//"Localhost" needs to be replaced with a static IP of the machine running the server
 	public NetworkConnect() throws IOException {
-		s = new Socket("localhost", 7070); 
+		s = new Socket("192.168.0.75", 7070); 
 		outputStream = s.getOutputStream();
 		objOutputStream = new ObjectOutputStream(outputStream);	
 		
@@ -25,17 +25,18 @@ public class NetworkConnect{
 	public void sendObject(ComplaintObject complaint) throws IOException {
 		//objOutputStream.writeObject(complaint);
 		try {
-			DBaseConnect db = new DBaseConnect();
-			db.sendComplaint(complaint);
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			objOutputStream.writeObject(complaint);
+		} catch(IOException i) {
+			System.out.println(i);
 		}
 	}
-	public void sendLogin() throws IOException{
+	public void sendLogin(String login, String pwd) throws IOException{
+		try {
+			objOutputStream.writeUTF(login);
+			objOutputStream.writeUTF(pwd);
+		} catch(IOException i) {
+			System.out.println(i);
+		}
 		
 		
 	}
