@@ -17,9 +17,11 @@ import javafx.geometry.Insets;
 
 public class Complaint extends Application {
 	public String user;
-	public Complaint(String userLogin)
+	public int rank;
+	public Complaint(LoginObject LO)
 	{
-		user = userLogin;
+		user = LO.getName();
+		rank = LO.getRank();
 	}
 	
 	private void upload(String name, String complaint, String dept) throws IOException {

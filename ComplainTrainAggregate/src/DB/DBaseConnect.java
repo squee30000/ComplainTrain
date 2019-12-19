@@ -1,6 +1,8 @@
 package DB;
 import java.sql.*;
 
+import Interface.LoginObject;
+
 public class DBaseConnect {
 	
 	private Connection connection;
@@ -9,7 +11,7 @@ public class DBaseConnect {
 		
 		connection = DriverManager.getConnection("jdbc:mysql://localhost/complainTrainCore");	
 	}
-	public String LoginAttempt(String ID) throws SQLException {
+	public LoginObject LoginAttempt(String ID) throws SQLException {
 		Statement statement = connection.createStatement();
 		
 		ResultSet RS = statement.executeQuery
@@ -21,11 +23,14 @@ public class DBaseConnect {
 		
 		//return true;
 		if(RS.getString("rank")!= "0") {
-			return RS.getString("EmployeeID");
+			
+			LoginObject LO = new LoginObject(RS.getString("EmployeeID"),Integer.parseInt(RS.getString("rank")));
+			return LO;
 		}else {
-			return "";
+			return null;
 		}
 	}
+	
 	
 	
 	
