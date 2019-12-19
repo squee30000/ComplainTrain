@@ -26,28 +26,24 @@ public class DBaseConnect {
 			return "";
 		}
 	}
-	public void sendComplaint(ComplaintObject c)throws SQLException {
-		PreparedStatement p = connection.prepareStatement("INSERT into complaint (complaintBody) values(?);");
+	
+	
+	
+	public void sendAnonComplaint(ComplaintObject c)throws SQLException {
+		PreparedStatement p;
+			p = connection.prepareStatement("INSERT into complaint (complaintBody) values(?);");
+			p.setString(1, c.getText());
+			p.execute();
+	}
+	
+	public void sendComplaint(ComplaintObject c)throws SQLException{
+		PreparedStatement p;
+		p = connection.prepareStatement("INSERT into complaint "+
+				"(complaintText,complaintEmployee) values(?,?);");
+		
+		p.setString(2, c.getName());
 		p.setString(1, c.getText());
-		
 		p.execute();
-		
-		Statement statement = connection.createStatement();
-		
-		
-		if(c.getName()!= null) {//excludes anonymous submissions
-			ResultSet complaintRecord = statement.executeQuery("SELECT c.complaintID" + 
-					"FROM complaint c, complaintCategory cg,, employee e, complaintemployee ce " + 
-					"WHERE complaintBody =  "+c.getText()+";");
-			
-			complaintRecord.next();
-			
-			p = connection.prepareStatement("INSERT into complaintemployee (complaintID, employeeID) values(?);");
-			
-			p.setString(1, c.getName());
-			p.setString(2, complaintRecord.getString(1));
-		}
-
 		
 	}
 }

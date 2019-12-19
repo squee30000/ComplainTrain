@@ -25,6 +25,7 @@ public class ComplaintObject {
         tags = new ArrayList<ComplaintTags>();
         complaintBody = complaint;
         department = dept;
+        name = null;
         //String dept2[] = dept.split(" ");
        
     }

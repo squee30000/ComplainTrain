@@ -107,11 +107,6 @@ public class Login extends Application {
 
 	public static void main(String[] args) {
 		launch(args);
-		try {
-			DB.NetworkConnect N =  new NetworkConnect();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		DB.NetworkConnect N =  new NetworkConnect();
 	}
 } 
