@@ -3,7 +3,7 @@ package Interface;
 import java.sql.SQLException;
 
 import DB.DBaseConnect;
-import DB.NetworkConnect;
+//import DB.NetworkConnect;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -15,6 +15,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 
 public class Login extends Application {
 	//private Event
@@ -32,7 +33,7 @@ public class Login extends Application {
 			gPane.setPadding(new Insets(10, 10, 10, 10));  
 			gPane.setVgap(5); 
 			gPane.setHgap(5);       
-			//gPane.setAlignment(Pos.LEFT);
+			gPane.setAlignment(Pos.CENTER_LEFT);
        
 			Scene scene = new Scene(gPane,400,210);
 			Button ok = new Button("OK");

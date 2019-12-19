@@ -16,10 +16,25 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import DB.*;
 public class ComplaintView {
+	DBaseConnect DB;
+	
 
 	public ComplaintView()
 	{
+		try {
+			DB = new DBaseConnect();
+		} catch (ClassNotFoundException e) {
+			//Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			//Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	private String getComplaint(String txt) {
@@ -38,10 +53,12 @@ public class ComplaintView {
 			Scene scene = new Scene(gPane,800,400);
 			Button ok = new Button("View");
 			TextArea complaintView = new TextArea();
-			//ListView<String> listView = new ListView<String>();
+			ListView<String> listView = new ListView<String>();
 
 			TextField searchTxt = new TextField();
 			gPane.add(complaintView, 2, 20);
+			gPane.add(listView,2,15);
+			gPane.add(ok,5,1);
 			
 			primaryStage.setTitle("Complaint View");
 			primaryStage.setScene(scene);
@@ -53,8 +70,26 @@ public class ComplaintView {
 				@Override
 				public void handle(ActionEvent e)
 				{
-					String s = getComplaint(searchTxt.getText());
-					complaintView.setText(s);
+					try {
+						ResultSet RS = DB.getComplaintsUnresolved();
+						while(RS.next()) {
+							String result=RS.getString(1)+" Submitted by "+ RS.getString(3)+", "+RS.getString(2);
+							listView.getItems().add(result);
+							
+						}
+						RS= DB.getAnonComplaintsUnresolved();
+						while(RS.next()) {
+							String result=RS.getString(1)+" Submitted Anonymously";
+							listView.getItems().add(result);
+							
+						}
+						
+					} catch (SQLException e1) {
+						//Auto-generated catch block
+						e1.printStackTrace();
+					}
+					//String s = getComplaint(searchTxt.getText());
+					//complaintView.setText(s);
 				}
 					
 			};

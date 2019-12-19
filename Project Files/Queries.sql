@@ -21,3 +21,20 @@ FROM complaint c, complaintCategory cg, category g, employee e
 WHERE c.complaintID = cg.complaintID 
 	AND e.employeeID = c.complaintEmployee
 	AND cg.categoryID = g.categID; 
+	
+SELECT complaintBody, FName, LName
+FROM complaint c, employee e
+WHERE c.complaintResolution = 0
+	AND c.complaintEmployee = e.employeeID; 
+	
+	
+SELECT complaintBody
+FROM complaint c
+WHERE c.complaintResolution <> 1
+	AND c.complaintID NOT IN(
+		SELECT complaintBody, FName, LName
+		FROM complaint c, employee e
+		WHERE c.complaintID = cg.complaintID 
+			AND c.complaintResolution = 0
+			AND c.complaintEmployee = e.employeeID
+	);

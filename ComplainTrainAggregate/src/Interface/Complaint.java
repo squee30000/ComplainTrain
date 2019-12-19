@@ -18,6 +18,8 @@ import javafx.geometry.Insets;
 public class Complaint extends Application {
 	public String user;
 	public int rank;
+	
+	
 	public Complaint(LoginObject LO)
 	{
 		user = LO.getName();

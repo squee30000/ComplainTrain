@@ -41,6 +41,30 @@ public class DBaseConnect {
 		p.execute();
 	}
 	
+	public ResultSet getComplaintsUnresolved()throws SQLException {
+		Statement statement = connection.createStatement();
+		ResultSet RS = statement.executeQuery("SELECT complaintBody, FName, LName " + 
+				"FROM complaint c, employee e " + 
+				"WHERE c.complaintResolution <> 1 " + 
+				"	AND c.complaintEmployee = e.employeeID;");
+		
+		return RS;
+	}
+	public ResultSet getAnonComplaintsUnresolved()throws SQLException {
+		Statement statement = connection.createStatement();
+		ResultSet RS = statement.executeQuery("SELECT complaintBody\r\n" + 
+				"FROM complaint c\r\n" + 
+				"WHERE c.complaintResolution <> 1\r\n" + 
+				"	AND c.complaintID NOT IN(\r\n" + 
+				"		SELECT complaintID\r\n" + 
+				"		FROM complaint c, employee e\r\n" + 
+				"		WHERE c.complaintResolution = 0\r\n" + 
+				"			AND c.complaintEmployee = e.employeeID \r\n" + 
+				"	);");
+		
+		return RS;
+	}
+	
 	public void sendComplaint(ComplaintObject c)throws SQLException{
 		PreparedStatement p;
 		p = connection.prepareStatement("INSERT into complaint (complaintBody,complaintEmployee) values(?,?);");

@@ -21,7 +21,7 @@ public class LogObjGUI extends Application {
 	/*
 	 * Final constructor
 	 */
-	/*
+	
 	public LogObjGUI(LoginObject LO)
 	{
 		user = LO.getName();
@@ -83,61 +83,47 @@ public class LogObjGUI extends Application {
 			Scene scene = new Scene(gPane,800,400);
 
 
-			Button submit = new Button("Submit");
-			//Label name = new Label("Name: ");
-			Label dept = new Label("Department: ");
-			Label complaint = new Label("Complaint:");
-			//TextField nameTxt = new TextField();
-			TextArea complaintEntry = new TextArea();
-			CheckBox anon = new CheckBox();
-			Label anonLabel = new Label("Anonymous");
-			ListView<String> complaintView = new ListView<String>();
-			ComboBox<String> deptList = new ComboBox<String>();
-			deptList.getItems().addAll(
-				"HR",
-				"IT",
-				"Accounting",
-				"Sales"
-			);
+			Button view = new Button("View complaints");
+			Button complain = new Button("Submit complaint");
 			
 			//gPane.add(name, 0, 0);
 			//gPane.add(nameTxt, 2, 0);
-			gPane.add(anon, 3, 0);
-			gPane.add(anonLabel, 4, 0);
-			gPane.add(dept, 0, 1); 
-			gPane.add(deptList, 2, 1);
-			gPane.add(complaint, 2, 10);
-			gPane.add(complaintEntry, 2, 12);
-			gPane.add(submit, 2, 20);
-			gPane.add(complaintView, 3, 30);
+			
+			gPane.add(view,3,3);
+			gPane.add(complain,5,3);
+			
 
 			
-			primaryStage.setTitle("Submit Complaint");
+			primaryStage.setTitle("Choose Path");
 			primaryStage.setScene(scene);
 			
 			primaryStage.show();
 	
 
-			EventHandler<ActionEvent> eventSubmit = new EventHandler<ActionEvent>() {
+			EventHandler<ActionEvent> eventView = new EventHandler<ActionEvent>() {
 				@Override
 				public void handle(ActionEvent e)
 				{
 					
-					try {
-						if (anon.isSelected()) {
-							upload(complaintEntry.getText(), deptList.getValue().toString());
-						} else {
-							upload(user, complaintEntry.getText(), deptList.getValue().toString());
-						}
-					}catch(IOException i1) {
-						
-						
-					}
+					
+					
+					ComplaintView cv = new ComplaintView();
+					cv.start(primaryStage);
 				}
 					
 			};
 			
-			submit.setOnAction(eventSubmit);
+			EventHandler<ActionEvent> eventComplain = new EventHandler<ActionEvent>() {
+				@Override
+				public void handle(ActionEvent e) {
+					Complaint c = new Complaint(new LoginObject(user, rank));
+					c.start(primaryStage);
+				}
+				
+			};
+			
+			view.setOnAction(eventView);
+			complain.setOnAction(eventComplain);
 
 		} catch (Exception e) {
 			e.printStackTrace();
