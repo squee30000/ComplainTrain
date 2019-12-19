@@ -67,7 +67,7 @@ public class Login extends Application {
 						DB.DBaseConnect connection = new DBaseConnect();
 						
 						LoginObject answer = connection.LoginAttempt(userText.getText());
-						if(answer != null && answer.rank >= 3) {
+						if(answer != null && answer.getRank() >= 3) {
 							
 							Complaint c = new Complaint(answer);
 							c.start(primaryStage);
