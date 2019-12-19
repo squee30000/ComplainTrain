@@ -12,7 +12,7 @@ public class TestNet {
 	}
 	
 	public void Send() throws IOException {
-		n.sendLogin("complaintrain");
+		n.sendLogin("Admin");
 	}
 	
 	public static void main(String[] args) {
