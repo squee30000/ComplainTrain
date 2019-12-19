@@ -18,6 +18,9 @@ import javafx.geometry.Insets;
 public class LogObjGUI extends Application {
 	public String user;
 	public int rank;
+	
+	//Test
+	public LoginObject l = new LoginObject("Test", 3);
 	/*
 	 * Final constructor
 	 */
@@ -35,40 +38,10 @@ public class LogObjGUI extends Application {
 	
 	public LogObjGUI()
 	{
-		user = "test";
-		rank = 2;
+
 	}
 	
-	private void upload(String name, String complaint, String dept) throws IOException {
-		DB.ComplaintObject c = new ComplaintObject(user, complaint, dept);
-		DB.DBaseConnect db;
-		try {
-			db = new DB.DBaseConnect();
-			db.sendComplaint(c);
-		} catch (ClassNotFoundException e1) {
-			// Auto-generated catch block
-			e1.printStackTrace();
-		} catch (SQLException e1) {
-			// Auto-generated catch block
-			e1.printStackTrace();
-		}
-		
-	}
-	
-	private void upload(String complaint, String dept) throws IOException {
-		DB.ComplaintObject c = new ComplaintObject(complaint, dept);
-		DB.DBaseConnect db;
-		try {
-			db = new DB.DBaseConnect();
-			db.sendAnonComplaint(c);
-		} catch (ClassNotFoundException e1) {
-			//Auto-generated catch block
-			e1.printStackTrace();
-		} catch (SQLException e1) {
-			//Auto-generated catch block
-			e1.printStackTrace();
-		}
-	}
+
 	
 	public void start(Stage primaryStage) {
 		try {
@@ -80,21 +53,23 @@ public class LogObjGUI extends Application {
 			gPane.setHgap(5);       
 			//gPane.setAlignment(Pos.LEFT);
        
-			Scene scene = new Scene(gPane,800,400);
+			Scene scene = new Scene(gPane,300,200);
+
 
 
 			Button view = new Button("View complaints");
 			Button complain = new Button("Submit complaint");
-			
-			//gPane.add(name, 0, 0);
-			//gPane.add(nameTxt, 2, 0);
-			
-			gPane.add(view,3,3);
-			gPane.add(complain,5,3);
+
+
 			
 
 			
-			primaryStage.setTitle("Choose Path");
+			gPane.add(view, 0, 20);
+			gPane.add(complain, 2, 20);
+
+
+			
+			primaryStage.setTitle("Select Task");
 			primaryStage.setScene(scene);
 			
 			primaryStage.show();
@@ -104,15 +79,13 @@ public class LogObjGUI extends Application {
 				@Override
 				public void handle(ActionEvent e)
 				{
-					
-					
-					
 					ComplaintView cv = new ComplaintView();
 					cv.start(primaryStage);
 				}
 					
 			};
 			
+
 			EventHandler<ActionEvent> eventComplain = new EventHandler<ActionEvent>() {
 				@Override
 				public void handle(ActionEvent e) {
