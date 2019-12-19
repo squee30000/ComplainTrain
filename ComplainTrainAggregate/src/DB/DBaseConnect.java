@@ -31,15 +31,14 @@ public class DBaseConnect {
 	
 	public void sendAnonComplaint(ComplaintObject c)throws SQLException {
 		PreparedStatement p;
-			p = connection.prepareStatement("INSERT into complaint (complaintBody) values(?);");
-			p.setString(1, c.getText());
-			p.execute();
+		p = connection.prepareStatement("INSERT into complaint (complaintBody) values(?);");
+		p.setString(1, c.getText());
+		p.execute();
 	}
 	
 	public void sendComplaint(ComplaintObject c)throws SQLException{
 		PreparedStatement p;
-		p = connection.prepareStatement("INSERT into complaint "+
-				"(complaintText,complaintEmployee) values(?,?);");
+		p = connection.prepareStatement("INSERT into complaint (complaintBody,complaintEmployee) values(?,?);");
 		
 		p.setString(2, c.getName());
 		p.setString(1, c.getText());

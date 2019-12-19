@@ -15,3 +15,10 @@ WHERE c.complaintID = cg.complaintID
 	AND cg.categoryID = g.categID
 	AND c.complaintID=ce.complaintID
 	AND ce.employeeID = e.employeeID; 
+	
+	
+SELECT complaintBody, catgAlias
+FROM complaint c, complaintCategory cg, category g, employee e
+WHERE c.complaintID = cg.complaintID 
+	AND e.employeeID = c.complaintEmployee
+	AND cg.categoryID = g.categID; 

@@ -1,5 +1,5 @@
 package Interface;
-import java.io.IOException;
+//import java.io.IOException;
 import java.sql.SQLException;
 
 import DB.DBaseConnect;
@@ -107,6 +107,6 @@ public class Login extends Application {
 
 	public static void main(String[] args) {
 		launch(args);
-		DB.NetworkConnect N =  new NetworkConnect();
+		//DB.NetworkConnect N =  new NetworkConnect();
 	}
 } 
