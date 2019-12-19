@@ -1,5 +1,5 @@
 package Interface;
-import java.io.IOException;
+//import java.io.IOException;
 import java.sql.SQLException;
 
 import DB.DBaseConnect;
@@ -65,11 +65,13 @@ public class Login extends Application {
 					try {
 						DB.DBaseConnect connection = new DBaseConnect();
 						
-						String answer = connection.LoginAttempt(userText.getText());
-						if(answer != "") {
+						LoginObject answer = connection.LoginAttempt(userText.getText());
+						if(answer != null) {
 							
 							Complaint c = new Complaint(answer);
 							c.start(primaryStage);
+							
+						}else {
 							
 						}
 						
@@ -107,11 +109,6 @@ public class Login extends Application {
 
 	public static void main(String[] args) {
 		launch(args);
-		try {
-			DB.NetworkConnect N =  new NetworkConnect();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		//DB.NetworkConnect N =  new NetworkConnect();
 	}
 } 

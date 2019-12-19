@@ -1,6 +1,8 @@
 package DB;
 import java.sql.*;
 
+import Interface.LoginObject;
+
 public class DBaseConnect {
 	
 	private Connection connection;
@@ -9,7 +11,7 @@ public class DBaseConnect {
 		
 		connection = DriverManager.getConnection("jdbc:mysql://localhost/complainTrainCore");	
 	}
-	public String LoginAttempt(String ID) throws SQLException {
+	public LoginObject LoginAttempt(String ID) throws SQLException {
 		Statement statement = connection.createStatement();
 		
 		ResultSet RS = statement.executeQuery
@@ -21,33 +23,31 @@ public class DBaseConnect {
 		
 		//return true;
 		if(RS.getString("rank")!= "0") {
-			return RS.getString("EmployeeID");
+			
+			LoginObject LO = new LoginObject(RS.getString("EmployeeID"),Integer.parseInt(RS.getString("rank")));
+			return LO;
 		}else {
-			return "";
+			return null;
 		}
 	}
-	public void sendComplaint(ComplaintObject c)throws SQLException {
-		PreparedStatement p = connection.prepareStatement("INSERT into complaint (complaintBody) values(?);");
+	
+	
+	
+	
+	public void sendAnonComplaint(ComplaintObject c)throws SQLException {
+		PreparedStatement p;
+		p = connection.prepareStatement("INSERT into complaint (complaintBody) values(?);");
 		p.setString(1, c.getText());
-		
 		p.execute();
+	}
+	
+	public void sendComplaint(ComplaintObject c)throws SQLException{
+		PreparedStatement p;
+		p = connection.prepareStatement("INSERT into complaint (complaintBody,complaintEmployee) values(?,?);");
 		
-		Statement statement = connection.createStatement();
-		
-		
-		if(c.getName()!= null) {//excludes anonymous submissions
-			ResultSet complaintRecord = statement.executeQuery("SELECT c.complaintID" + 
-					"FROM complaint c, complaintCategory cg,, employee e, complaintemployee ce " + 
-					"WHERE complaintBody =  "+c.getText()+";");
-			
-			complaintRecord.next();
-			
-			p = connection.prepareStatement("INSERT into complaintemployee (complaintID, employeeID) values(?);");
-			
-			p.setString(1, c.getName());
-			p.setString(2, complaintRecord.getString(1));
-		}
-
+		p.setString(2, c.getName());
+		p.setString(1, c.getText());
+		p.execute();
 		
 	}
 }

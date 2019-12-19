@@ -1,6 +1,6 @@
 package Interface;
 
-import java.io.IOException;
+//import java.io.IOException;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -24,7 +24,7 @@ public class ComplaintView {
 	
 	private String getComplaint(String txt) {
 		
-		
+		return "";
 	}
 	public void start(Stage primaryStage) {
 		try {
@@ -38,7 +38,7 @@ public class ComplaintView {
 			Scene scene = new Scene(gPane,800,400);
 			Button ok = new Button("View");
 			TextArea complaintView = new TextArea();
-			ListView<String> listView = new ListView();
+			//ListView<String> listView = new ListView<String>();
 
 			TextField searchTxt = new TextField();
 			gPane.add(complaintView, 2, 20);

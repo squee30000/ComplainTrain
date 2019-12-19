@@ -9,17 +9,19 @@ import javafx.event.*;
 
 import javafx.stage.Stage;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
+//import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.control.*;
-import javafx.geometry.Pos;
+//import javafx.geometry.Pos;
 import javafx.geometry.Insets;
 
 public class Complaint extends Application {
 	public String user;
-	public Complaint(String userLogin)
+	public int rank;
+	public Complaint(LoginObject LO)
 	{
-		user = userLogin;
+		user = LO.getName();
+		rank = LO.getRank();
 	}
 	
 	private void upload(String name, String complaint, String dept) throws IOException {
@@ -29,10 +31,10 @@ public class Complaint extends Application {
 			db = new DB.DBaseConnect();
 			db.sendComplaint(c);
 		} catch (ClassNotFoundException e1) {
-			// TODO Auto-generated catch block
+			// Auto-generated catch block
 			e1.printStackTrace();
 		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
+			// Auto-generated catch block
 			e1.printStackTrace();
 		}
 		
@@ -43,12 +45,12 @@ public class Complaint extends Application {
 		DB.DBaseConnect db;
 		try {
 			db = new DB.DBaseConnect();
-			db.sendComplaint(c);
+			db.sendAnonComplaint(c);
 		} catch (ClassNotFoundException e1) {
-			// TODO Auto-generated catch block
+			//Auto-generated catch block
 			e1.printStackTrace();
 		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
+			//Auto-generated catch block
 			e1.printStackTrace();
 		}
 	}
@@ -66,15 +68,15 @@ public class Complaint extends Application {
 
 
 			Button submit = new Button("Submit");
-			Label name = new Label("Name: ");
+			//Label name = new Label("Name: ");
 			Label dept = new Label("Department: ");
 			Label complaint = new Label("Complaint:");
-			TextField nameTxt = new TextField();
+			//TextField nameTxt = new TextField();
 			TextArea complaintEntry = new TextArea();
 			CheckBox anon = new CheckBox();
 			Label anonLabel = new Label("Anonymous");
 			
-			ComboBox deptList = new ComboBox();
+			ComboBox<String> deptList = new ComboBox<String>();
 			deptList.getItems().addAll(
 				"HR",
 				"IT",
@@ -82,8 +84,8 @@ public class Complaint extends Application {
 				"Sales"
 			);
 			
-			gPane.add(name, 0, 0);
-			gPane.add(nameTxt, 2, 0);
+			//gPane.add(name, 0, 0);
+			//gPane.add(nameTxt, 2, 0);
 			gPane.add(anon, 3, 0);
 			gPane.add(anonLabel, 4, 0);
 			gPane.add(dept, 0, 1); 
@@ -109,7 +111,7 @@ public class Complaint extends Application {
 						if (anon.isSelected()) {
 							upload(complaintEntry.getText(), deptList.getValue().toString());
 						} else {
-							upload(nameTxt.getText(), complaintEntry.getText(), deptList.getValue().toString());
+							upload(user, complaintEntry.getText(), deptList.getValue().toString());
 						}
 					}catch(IOException i1) {
 						

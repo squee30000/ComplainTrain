@@ -2,10 +2,10 @@ package Interface;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
+
 import javafx.scene.layout.GridPane;
 import javafx.scene.control.*;
-import javafx.geometry.Pos;
+
 import javafx.geometry.Insets;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -65,7 +65,7 @@ public class Admin extends Application {
 			
 			TextField searchTxt = new TextField();
 			TextArea complaintView = new TextArea();
-			ListView<String> listView = new ListView();
+			ListView<String> listView = new ListView<String>();
 			
 			ObservableList<String> complaints = FXCollections.observableArrayList(
 				"Complaint 1",
